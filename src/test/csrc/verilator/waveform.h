@@ -19,11 +19,13 @@
 #include "verilated.h"
 #ifdef ENABLE_FST
 #include <verilated_fst_c.h>
+using TraceClass = VerilatedFstC;
 #else
 #include <verilated_vcd_c.h>
+using TraceClass = VerilatedVcdC;
 #endif // ENABLE_FST
 
-using TraceBindFunc = std::function<void(VerilatedTraceBaseC *, int)>;
+using TraceBindFunc = std::function<void(TraceClass *, int)>;
 
 class EmuWaveform {
 private:

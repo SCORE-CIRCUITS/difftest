@@ -65,6 +65,7 @@ const char *spike_dasm(uint64_t inst) {
 }
 
 // This is an example usage. Not used.
+static int usage() __attribute__((unused));
 static int usage() {
   uint64_t input = 0x10500073L;
 

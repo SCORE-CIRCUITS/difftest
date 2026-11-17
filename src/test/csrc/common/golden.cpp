@@ -125,7 +125,7 @@ static inline void set_pte_helper_result(uint64_t *pte, uint8_t *level, uint64_t
 static r_s2xlate do_g_stage(Hgatp *hgatp, uint64_t gpaddr, bool pbmte) {
   PTE pte;
   uint64_t hpaddr;
-  uint8_t level;
+  int level;
   uint64_t pg_base = hgatp->ppn << 12;
   r_s2xlate result;
 
@@ -185,7 +185,7 @@ uint8_t pte_helper(uint64_t satp, uint64_t vsatp, uint64_t hgatp, uint8_t mPBMTE
   PTE result_pte;
   PTE s1_gpa_pte = {};
   uint64_t paddr;
-  uint8_t result_level;
+  int result_level;
   uint8_t s1_gpa_level = 0;
   r_s2xlate g_result;
 

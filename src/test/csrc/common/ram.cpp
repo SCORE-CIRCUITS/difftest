@@ -324,16 +324,19 @@ void MmapMemory::load_image(const char *image) {
   printf("The image is %s\n", image);
   if (isGzFile(image)) {
     Info("Gzip file detected and loading image from extracted gz file\n");
-    img_size = readFromGz(ram, image, memory_size, LOAD_RAM);
-    assert(img_size >= 0);
+    long sz = readFromGz(ram, image, memory_size, LOAD_RAM);
+    assert(sz >= 0);
+    img_size = sz;
   } else if (isZstdFile(image)) {
     Info("Zstd file detected and loading image from extracted zstd file\n");
-    img_size = readFromZstd(ram, image, memory_size, LOAD_RAM);
-    assert(img_size >= 0);
+    long sz = readFromZstd(ram, image, memory_size, LOAD_RAM);
+    assert(sz >= 0);
+    img_size = sz;
   } else if (isElfFile(image)) {
     Info("ELF file detected and loading image from extracted elf file\n");
-    img_size = readFromElf(ram, image, memory_size);
-    assert(img_size >= 0);
+    long sz = readFromElf(ram, image, memory_size);
+    assert(sz >= 0);
+    img_size = sz;
   } else {
     InputReader *reader = createInputReader(image);
     img_size = reader->read_all(ram, memory_size);

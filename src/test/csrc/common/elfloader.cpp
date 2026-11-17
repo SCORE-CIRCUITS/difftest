@@ -80,7 +80,7 @@ bool isElfFile(const char *filename) {
   fd = open(filename, O_RDONLY);
   assert(fd);
 
-  uint8_t buf[4];
+  uint8_t buf[sizeof(Elf64_Ehdr)];
 
   size_t sz = read(fd, buf, 4);
   if (!IS_ELF(*((const Elf64_Ehdr *)buf))) {
